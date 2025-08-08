@@ -111,32 +111,15 @@ class DigitalPoltergeist:
             time.sleep(random.uniform(0.5, 2.5))
 
     def ghost_scroll(self):
-        """Spooky fast scroll with up/down movement."""
-        while self.running and not self.stop_event.is_set():
-            try:
-                if self.is_safe_window() and random.random() < 0.25:  # Slightly more frequent
-                    w, h = pyautogui.size()
-                    # Move mouse to a random spot in the central area of the screen
-                    target_x = random.randint(w // 4, 3 * w // 4)
-                    target_y = random.randint(h // 4, 3 * h // 4)
-                    pyautogui.moveTo(target_x, target_y, duration=0.1)
-
-                    direction = random.choice(["up", "down"])
-                    clicks = random.randint(15, 40)  # More intense scrolling
-                    amount = 1 if direction == "up" else -1
-
-                    # Very quick scrolling loop
-                    for _ in range(clicks):
-                        if not self.running or self.stop_event.is_set():
-                            break
-                        pyautogui.scroll(amount)
-                        time.sleep(0.005)  # Faster than before
-
-                    self.log(f"Scrolled {direction} very quickly ({clicks} steps)")
-            except Exception as e:
-                self.log(f"Scroll ghost error: {e}")
-            time.sleep(random.uniform(0.5, 1.5))
-
+     while self.running and not self.stop_event.is_set():
+        try:
+            if self.is_safe_window() and random.random() < 0.15:
+                amount = random.choice([-300, -200, -100, 100, 200, 300])
+                pyautogui.scroll(amount)
+                self.log(f"Ghost scrolled the window by {amount} units")
+        except Exception as e:
+            self.log(f"Scroll ghost error: {e}")
+        time.sleep(random.uniform(0.5,0.5))
 
     def ghost_typing(self):
         while self.running and not self.stop_event.is_set():
@@ -215,7 +198,7 @@ class DigitalPoltergeist:
                                 "ffplay", "-fs", "-autoexit", "-loglevel", "quiet", str(chosen)
                             ])
                         else:
-                            self.log(f"MEDIA: Playing audio {chosen.name}")
+                            self.log(f"MEDIA: Playing audio {chosen.naY}")
                             self.play_audio_in_background(chosen)
 
                     last_play_time = now
