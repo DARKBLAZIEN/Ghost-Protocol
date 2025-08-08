@@ -216,12 +216,10 @@ class DigitalPoltergeist:
                         chosen = random.choice(available_media)
                         self.last_played_media = chosen
                         if media_type == "video":
-                            self.log(f"MEDIA: Playing video {chosen.name}")
                             subprocess.Popen([
                                 "ffplay", "-fs", "-autoexit", "-loglevel", "quiet", str(chosen)
                             ])
                         else:
-                            self.log(f"MEDIA: Playing audio {chosen.name}")
                             self.play_audio_in_background(chosen)
 
                     last_play_time = now
