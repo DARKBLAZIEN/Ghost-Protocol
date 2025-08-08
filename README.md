@@ -33,12 +33,18 @@ For Software:
 For Software:
 # Installation
 https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-2025-08-04-git-9a32b86307-full_build.7z
+
 Extract this at C:/ffmpeg
+
 Add C:ffmpeg/bin as new path in System Variables in Environment Variables
 
+
 Then at our main python scripts directory:
+
 pip install pyautogui
+
 pip install tkinter  
+
 pip install pillow    
 
 
