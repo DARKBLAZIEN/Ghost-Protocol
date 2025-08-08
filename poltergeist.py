@@ -77,38 +77,48 @@ class DigitalPoltergeist:
         return True
 
     def ghost_mouse(self):
+        w, h = pyautogui.size()
         while self.running and not self.stop_event.is_set():
             try:
-                if self.is_safe_window() and random.random() < 0.35:
-                    w, h = pyautogui.size()
+                if self.is_safe_window() and random.random() < 0.50:  # Increased chance from 0.35 to 0.5
                     movement_type = random.choice(["random", "circle", "zigzag"])
                     if movement_type == "random":
                         x = random.randint(100, max(100, w - 100))
                         y = random.randint(100, max(100, h - 100))
-                        pyautogui.moveTo(x, y, duration=random.uniform(0.5, 1.8))
+                        pyautogui.moveTo(x, y, duration=random.uniform(0.3, 1.0))
+                        if random.random() < 0.7:  # 70% chance to click after move
+                            pyautogui.click()
                         self.log(f"Mouse moved mysteriously to ({x}, {y})")
                     elif movement_type == "circle":
                         cx, cy = w // 2, h // 2
-                        radius = random.randint(80, 160)
+                        radius = random.randint(200, 400)  # Reduced radius so circle fits screen nicely
                         for angle in range(0, 360, 12):
                             if not self.running or self.stop_event.is_set():
                                 break
                             x = cx + radius * math.sin(math.radians(angle))
                             y = cy + radius * math.cos(math.radians(angle))
-                            pyautogui.moveTo(int(x), int(y), duration=0.05)
+                            pyautogui.moveTo(int(x), int(y), duration=0.03)
+                        if random.random() < 0.5:
+                            pyautogui.click()
                         self.log("Mouse drew a mysterious circle")
                     else:
+                        # Zigzag across nearly full width and height
                         sx, sy = pyautogui.position()
-                        for i in range(6):
+                        length_x = w - 100  # full width minus margin
+                        step_y = max(30, h // 10)  # vertical step roughly 1/10th of screen height
+                        for i in range(15):  # more zigzag steps for bigger coverage
                             if not self.running or self.stop_event.is_set():
                                 break
-                            x = sx + ((-1) ** i) * (i * 55)
-                            y = sy + i * 28
-                            pyautogui.moveTo(x, y, duration=0.12)
-                        self.log("Mouse moved in a zigzag pattern")
+                            x = 50 if i % 2 == 0 else length_x  # alternate left-right extremes
+                            y = 50 + i * step_y
+                            if y > h - 50:
+                                y = h - 50
+                            pyautogui.moveTo(x, y, duration=0.1)
+                        self.log("Mouse moved in a large zigzag pattern")
             except Exception as e:
                 self.log(f"Mouse ghost error: {e}")
-            time.sleep(random.uniform(0.5, 2.5))
+            time.sleep(random.uniform(0.3, 1.5))  # more frequent moves, reduced sleep
+
 
     def ghost_scroll(self):
      while self.running and not self.stop_event.is_set():
