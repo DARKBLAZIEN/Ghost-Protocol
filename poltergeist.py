@@ -55,8 +55,8 @@ class DigitalPoltergeist:
 
         # Predefined jumpscare and audio files
         here = Path(__file__).parent
-        self.jumpscare_videos = [here / f for f in ["1.mp4", "3.mp4", "4.mp4", "5.mp4", "6.mp4"] if (here / f).exists()]
-        self.creepy_audios = [here / f for f in ["knock.wav", "whisper.aiff", "scream.mp3", "static.mp3"] if (here / f).exists()]
+        self.jumpscare_videos = [here / f for f in ["1.mp4", "3.mp4", "5.mp4","7.mp4","8.mp4","9.mp4","10.mp4","11.mp4","12.mp4"] if (here / f).exists()]
+        self.creepy_audios = [here / f for f in ["knock.wav", "whisper.wav", "scream.wav", "static.wav"] if (here / f).exists()]
 
     def log(self, msg):
         ts = datetime.now().strftime("%H:%M:%S")
@@ -177,13 +177,13 @@ class DigitalPoltergeist:
 
     def ghost_media(self):
         last_play_time = 0
-        interval = 20  # Seconds between media events (increased frequency)
+        interval = 8  # Seconds between media events (increased frequency)
         while self.running and not self.stop_event.is_set():
             try:
                 now = time.time()
                 if now - last_play_time >= interval:
                     available_media = []
-                    media_type = random.choice(["video", "audio"])
+                    media_type = random.choices(["video", "audio"], weights=[0.75, 0.25])[0]
                     if media_type == "video" and self.jumpscare_videos:
                         available_media = [m for m in self.jumpscare_videos if m != self.last_played_media]
                     elif media_type == "audio" and self.creepy_audios:
@@ -198,7 +198,7 @@ class DigitalPoltergeist:
                                 "ffplay", "-fs", "-autoexit", "-loglevel", "quiet", str(chosen)
                             ])
                         else:
-                            self.log(f"MEDIA: Playing audio {chosen.naY}")
+                            self.log(f"MEDIA: Playing audio {chosen.name}")
                             self.play_audio_in_background(chosen)
 
                     last_play_time = now
