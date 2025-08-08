@@ -217,7 +217,7 @@ class DigitalPoltergeist:
                         self.last_played_media = chosen
                         if media_type == "video":
                             subprocess.Popen([
-                                "ffplay", "-fs", "-autoexit", "-loglevel", "quiet", str(chosen)
+                                "ffplay", "-fs", "-autoexit", "-loglevel", "quiet", "-alwaysontop", str(chosen)
                             ])
                         else:
                             self.play_audio_in_background(chosen)
@@ -318,7 +318,7 @@ def play_valak_video():
             "ffplay",
             "-fs",
             "-autoexit",
-            "-loglevel", "quiet",
+            "-loglevel", "quiet",  "-alwaysontop",
             str(valak_video)
         ])
     except FileNotFoundError:
