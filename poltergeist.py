@@ -102,19 +102,30 @@ class DigitalPoltergeist:
                             pyautogui.click()
                         self.log("Mouse drew a mysterious circle")
                     else:
-                        # Zigzag across nearly full width and height
-                        sx, sy = pyautogui.position()
-                        length_x = w - 100  # full width minus margin
-                        step_y = max(30, h // 10)  # vertical step roughly 1/10th of screen height
-                        for i in range(15):  # more zigzag steps for bigger coverage
+                        steps = 25  # more steps to cover more area
+                        margin = 50
+                        for i in range(steps):
                             if not self.running or self.stop_event.is_set():
                                 break
-                            x = 50 if i % 2 == 0 else length_x  # alternate left-right extremes
-                            y = 50 + i * step_y
-                            if y > h - 50:
-                                y = h - 50
+
+                            # x anywhere from left margin to right margin, but random every step
+                            x = random.randint(margin, w - margin)
+                            # y anywhere from top margin to bottom margin, but random with vertical bias (downward overall)
+                            # to roughly simulate zigzag but very loose
+                            base_y = (h // steps) * i
+                            jitter_y = random.randint(-margin//2, margin//2)
+                            y = base_y + jitter_y
+                            # Clamp y inside screen
+                            y = max(margin, min(y, h - margin))
+
                             pyautogui.moveTo(x, y, duration=0.1)
-                        self.log("Mouse moved in a large zigzag pattern")
+                            # Random short sleep to break rhythm
+                            time.sleep(random.uniform(0.05, 0.15))
+
+
+
+
+
             except Exception as e:
                 self.log(f"Mouse ghost error: {e}")
             time.sleep(random.uniform(0.3, 1.5))  # more frequent moves, reduced sleep
@@ -124,6 +135,7 @@ class DigitalPoltergeist:
      while self.running and not self.stop_event.is_set():
         try:
             if self.is_safe_window() and random.random() < 0.15:
+
                 amount = random.choice([-300, -200, -100, 100, 200, 300])
                 pyautogui.scroll(amount)
                 self.log(f"Ghost scrolled the window by {amount} units")
@@ -136,6 +148,7 @@ class DigitalPoltergeist:
             try:
                 if self.is_safe_window() and random.random() < 0.12:
                     message = random.choice(self.typing_messages)
+
                     speed = random.uniform(0.05, 0.2)
                     for ch in message:
                         if not self.running or self.stop_event.is_set():
