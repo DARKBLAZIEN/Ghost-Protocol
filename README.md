@@ -10,7 +10,7 @@
 
 ### Team Members
 - Team Lead: Rohit M R - CUSAT
-- Member 2: [Shenes Eapen Koshy] - CUSAT
+- Member 2: Shenes Eapen Koshy - CUSAT
 
 ### Project Description
 Ghost Protocol is a creepy prank program that simulates paranormal activity on your computer by moving the mouse randomly, typing eerie messages, showing ghostly popups, playing scary videos and audios, and more — all without user interaction.
