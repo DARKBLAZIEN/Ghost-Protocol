@@ -77,7 +77,7 @@ This workflow diagram clearly illustrates the main logic and options of the prog
 
 ### Project Demo
 # Video
-![Demo video](https://drive.google.com/file/d/1lXuatK3Y5zUx-CqmwfF7Ro2vOii7kk9i/view?usp=sharing)
+(https://drive.google.com/file/d/1lXuatK3Y5zUx-CqmwfF7Ro2vOii7kk9i/view?usp=sharing)
 Demonstrates the starting of the exe file... the Valak's intro... random mouse movement, circular movement, zigzag movement, random clicking (because notepad was open but suddenly it went behind the file manager tab indicating that file manager tab was clicked), automatically typing messages (in the notepad it started typing messages, fyi : it was really hard to open the notepad just to show you guys that the typing works). Additional jumpscares and sfx to scare you.... Random popups showing spooky messages etc....
 
 # Additional Demos
