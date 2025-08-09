@@ -69,8 +69,9 @@ Name: Starting of chaos
 When the user clicks yes for the previous image's popup, then this small intro video starts to load and fades out, then the chaos begins
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+![Workflow](https://drive.google.com/file/d/1zXubRmXWbBEVHfw0gETMDfP7M_iysry-/view?usp=sharing)
+
+This workflow diagram clearly illustrates the main logic and options of the program—from starting, asking the user for confirmation, setting the haunting scene, running various parallel “ghost” behaviours, providing user controls, monitoring for emergency stop, to finally exiting gracefully. Each step is enclosed in a box, with arrows showing the path and decisions, making the application's operations easy to visualize and understand.
 
 
 
